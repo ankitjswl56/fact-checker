@@ -1,0 +1,19 @@
+# Known satire/parody domains — excluded from credibility scoring (score 0.0)
+theonion.com
+babylonbee.com
+clickhole.com
+thebeaverton.com
+waterfordwhispersnews.com
+newsthump.com
+duffelblog.com
+thedailymash.co.uk
+reductress.com
+thehardtimes.net
+worldnewsdailyreport.com
+empirenews.net
+nationalreport.net
+satirewire.com
+thespoof.com
+private-eye.co.uk
+newsbiscuit.com
+uncyclopedia.com
