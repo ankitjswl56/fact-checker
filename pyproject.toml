@@ -23,6 +23,7 @@ dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
     "pytest-recording>=0.13",
+    "vcrpy>=6.0",
     "mypy>=1.10",
 ]
 
@@ -35,6 +36,7 @@ fact_checker = ["data/*.json", "data/*.txt"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+addopts = "--record-mode=none"
 
 [tool.mypy]
 python_version = "3.11"

@@ -1,0 +1,97 @@
+interactions:
+- request:
+    body: '{"api_key": "REDACTED", "query": "who is the CEO of Apple", "max_results":
+      3, "search_depth": "basic"}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '145'
+      content-type:
+      - application/json
+      host:
+      - api.tavily.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://api.tavily.com/search
+  response:
+    body:
+      string: "{\"query\":\"who is the CEO of Apple\",\"follow_up_questions\":null,\"answer\":null,\"images\":[],\"results\":[{\"url\":\"https://www.apple.com/leadership/tim-cook\",\"title\":\"Tim
+        Cook - Apple Leadership\",\"content\":\"Tim Cook is the CEO of Apple and serves
+        on its board of directors. Before being named CEO in August 2011, Tim was
+        Apple\u2019s chief operating officer and was responsible for all of the company\u2019s
+        worldwide sales and operations, including end-to-end management of Apple\u2019s
+        supply chain, sales activities, and service and support in all markets and
+        countries. He also headed Apple\u2019s Macintosh division and played a key
+        role in the continued development of strategic reseller and supplier relationships,
+        ensuring flexibility in response to an increasingly demanding marketplace.
+        Prior to joining Apple, Tim was vice president of Corporate Materials for
+        Compaq and was responsible for procuring and managing all of Compaq\u2019s
+        product inventory. Previous to his work at Compaq, Tim was the chief operating
+        officer of the Reseller Division at Intelligent Electronics. Tim also spent
+        12 years with IBM, most recently as director of North American Fulfillment
+        where he led manufacturing and distribution functions for IBM\u2019s Personal
+        Computer Company in North and Latin America.\",\"score\":0.8763069,\"raw_content\":null},{\"url\":\"https://www.youtube.com/watch?v=u9Sy3qwthCw\",\"title\":\"Tim
+        Cook Steps Down: The Man Who Made Apple a $3 ...\",\"content\":\"Tim Cook
+        is stepping down after 11 consequential years as CEO of Apple, John Ternus
+        will become the new CEO.\",\"score\":0.8018276,\"raw_content\":null},{\"url\":\"https://www.apple.com/newsroom/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo\",\"title\":\"Tim
+        Cook to become Apple Executive Chairman John Ternus to become Apple CEO -
+        Apple\",\"content\":\"*   [Apple](https://www.apple.com/). *   [Store](https://www.apple.com/us/shop/goto/store).
+        *   [Mac](https://www.apple.com/mac/). *   [iPad](https://www.apple.com/ipad/).
+        *   [iPhone](https://www.apple.com/iphone/). *   [Watch](https://www.apple.com/watch/).
+        *   [AirPods](https://www.apple.com/airpods/). *   [Entertainment](https://www.apple.com/entertainment/).
+        *   [Accessories](https://www.apple.com/us/shop/goto/buy_accessories). *   [](https://www.apple.com/us/search).
+        *   [](https://www.apple.com/us/shop/goto/bag)0+. [Newsroom](https://www.apple.com/newsroom/).
+        ![Image 1: Tim Cook and John Ternus at Apple Park.](https://www.apple.com/newsroom/images/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo/article/Apple-John-Ternus-Tim-Cook_Full-Bleed-Image.jpg.large.jpg).
+        [](https://www.apple.com/newsroom/images/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo/article/Apple-John-Ternus-Tim-Cook.zip).
+        ![Image 2: John Ternus.](https://www.apple.com/newsroom/images/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo/article/Apple-John-Ternus_inline.jpg.large.jpg).
+        [](https://www.apple.com/newsroom/images/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo/article/Apple-John-Ternus.zip).
+        [Copy text](https://www.apple.com/newsroom/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo#).
+        [Download all media](https://www.apple.com/newsroom/images/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo/article/Images-of-Apple-Tim-Cook-John-Ternus.zip).
+        Read more](https://www.apple.com/newsroom/). [\uF8FFApple](https://www.apple.com/).
+        1.   [Newsroom](https://www.apple.com/newsroom/). *   [Store](https://www.apple.com/us/shop/goto/store).
+        *   [Mac](https://www.apple.com/mac/). *   [iPad](https://www.apple.com/ipad/).
+        *   [iPhone](https://www.apple.com/iphone/). *   [Watch](https://www.apple.com/watch/).
+        *   [AirPods](https://www.apple.com/airpods/). *   [AirTag](https://www.apple.com/airtag/).
+        *   [Accessories](https://www.apple.com/us/shop/goto/buy_accessories). *   [Gift
+        Cards](https://www.apple.com/us/shop/goto/giftcards). *   [Wallet](https://www.apple.com/wallet/).
+        *   [Apple Store Account](https://www.apple.com/us/shop/goto/account). *   [Apple
+        One](https://www.apple.com/apple-one/). *   [App Store](https://www.apple.com/app-store/).
+        *   [Find a Store](https://www.apple.com/retail/). *   [Today at Apple](https://www.apple.com/today/).
+        *   [Certified Refurbished](https://www.apple.com/us/shop/goto/special_deals).
+        *   [Apple Trade In](https://www.apple.com/us/shop/goto/trade_in). *   [Financing](https://www.apple.com/us/shop/goto/payment_plan).
+        *   [Shopping Help](https://www.apple.com/us/shop/goto/help). *   [Apple and
+        Business](https://www.apple.com/business/). *   [Shop for Business](https://www.apple.com/retail/business/).
+        *   [Apple and Education](https://www.apple.com/education/). *   [Shop for
+        K-12](https://www.apple.com/education/k12/how-to-buy/). *   [Shop for College](https://www.apple.com/us/shop/goto/educationrouting).
+        *   [Apple and Healthcare](https://www.apple.com/healthcare/). *   [Apple
+        and Government](https://www.apple.com/government/). *   [Shop for Federal
+        Employees](https://www.apple.com/us_epp_55499/store). *   [Accessibility](https://www.apple.com/accessibility/).
+        *   [Education](https://www.apple.com/education-initiative/). *   [Environment](https://www.apple.com/environment/).
+        *   [Privacy](https://www.apple.com/privacy/). *   [Newsroom](https://www.apple.com/newsroom/).
+        *   [Apple Leadership](https://www.apple.com/leadership/). *   [Career Opportunities](https://www.apple.com/careers/us/).
+        *   [Ethics & Compliance](https://www.apple.com/compliance/). *   [Contact
+        Apple](https://www.apple.com/contact/). *   [Legal](https://www.apple.com/legal/).
+        *   [Site Map](https://www.apple.com/sitemap/).\",\"score\":0.7515939,\"raw_content\":null}],\"response_time\":0.0,\"request_id\":\"42c03754-f4cd-43c4-9947-0f5f33e218e3\"}"
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '5896'
+      content-security-policy:
+      - default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self';
+        style-src 'self';base-uri 'self';form-action 'self'; require-trusted-types-for
+        'script'; upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 05 Jul 2026 05:49:14 GMT
+    status:
+      code: 200
+      message: OK
+version: 1
