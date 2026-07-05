@@ -28,6 +28,22 @@ class SubClaimResult(BaseModel):
     )
 
 
+class SynthesisResult(BaseModel):
+    """The synthesizer's output: a verdict over an already-scored evidence pool.
+
+    Deliberately excludes `sources` and `metadata` — those are assembled by the
+    orchestrator (sources are the input evidence pool itself; metadata is
+    pipeline-level bookkeeping like timing and search queries run).
+    """
+
+    verdict: VerdictType
+    confidence: float = Field(ge=0.0, le=1.0)
+    summary: str = Field(min_length=1)
+    sub_claims: list[SubClaimResult] = Field(default_factory=list)
+    reasoning_trace: str = Field(min_length=1)
+    warnings: list[str] = Field(default_factory=list)
+
+
 class FactCheckMetadata(BaseModel):
     sub_claims_count: int = Field(ge=0)
     sources_evaluated: int = Field(ge=0)

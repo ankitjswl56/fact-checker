@@ -9,6 +9,7 @@ from fact_checker.models.verdict import (
     FactCheckMetadata,
     FactCheckResult,
     SubClaimResult,
+    SynthesisResult,
     VerdictType,
 )
 
@@ -23,5 +24,6 @@ __all__ = [
     "FactCheckMetadata",
     "FactCheckResult",
     "SubClaimResult",
+    "SynthesisResult",
     "VerdictType",
 ]
