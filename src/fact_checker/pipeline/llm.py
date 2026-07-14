@@ -6,7 +6,7 @@ from typing import TypeVar
 import litellm
 from pydantic import BaseModel
 
-DEFAULT_MODEL = "gemini/gemini-3.5-flash"
+DEFAULT_MODEL = "gemini/gemini-3.1-flash-lite"
 DEFAULT_FAST_MODEL = "gemini/gemini-3.1-flash-lite"
 
 T = TypeVar("T", bound=BaseModel)
@@ -34,6 +34,7 @@ async def complete_structured(
             {"role": "user", "content": user},
         ],
         response_format=response_model,
+        num_retries=5,
     )
     content = response.choices[0].message.content
     return response_model.model_validate_json(content)
