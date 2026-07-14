@@ -56,6 +56,13 @@ async def fact_check(
         evidence=research.evidence,
     )
 
+    warnings = list(synthesis.warnings)
+    if research.used_cache:
+        warnings.append(
+            "Some search results were served from cache rather than a fresh "
+            "search, and may not reflect the most recent information."
+        )
+
     return FactCheckResult(
         verdict=synthesis.verdict,
         confidence=synthesis.confidence,
@@ -63,7 +70,7 @@ async def fact_check(
         sub_claims=synthesis.sub_claims,
         sources=research.evidence,
         reasoning_trace=synthesis.reasoning_trace,
-        warnings=synthesis.warnings,
+        warnings=warnings,
         metadata=FactCheckMetadata(
             sub_claims_count=len(classification.sub_claims),
             sources_evaluated=len(research.evidence),

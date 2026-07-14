@@ -23,12 +23,13 @@ def _clear_search_cache():
 async def test_tavily_search_returns_results() -> None:
     backend = TavilySearchBackend(api_key=_TAVILY_API_KEY)
     try:
-        results = await backend.search("who is the CEO of Apple", max_results=3)
+        response = await backend.search("who is the CEO of Apple", max_results=3)
     finally:
         await backend.aclose()
 
-    assert results
-    for result in results:
+    assert response.from_cache is False
+    assert response.results
+    for result in response.results:
         assert result.url
         assert result.domain
         assert result.title

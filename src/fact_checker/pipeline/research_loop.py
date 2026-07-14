@@ -144,6 +144,7 @@ Rules:
 class ResearchResult(BaseModel):
     evidence: list[Evidence]
     search_queries_run: list[str]
+    used_cache: bool = False
 
 
 async def research_claim(
@@ -159,6 +160,7 @@ async def research_claim(
     queries_run: list[str] = []
     fetched_pages: dict[str, PageContent] = {}
     published_dates: dict[str, datetime | None] = {}
+    used_cache = False
 
     user_content = f"Claim to research: {claim}"
     if context:
@@ -198,9 +200,10 @@ async def research_claim(
                 args = {}
 
             if name == "search":
-                result_text = await _handle_search(
-                    search_backend, args, queries_run, published_dates
+                result_text, from_cache = await _handle_search(
+                    search_backend, args, queries_run, published_dates, claim_type
                 )
+                used_cache = used_cache or from_cache
             elif name == "fetch_page":
                 result_text = await _handle_fetch(args, fetched_pages)
             elif name == "save_evidence":
@@ -222,7 +225,7 @@ async def research_claim(
         if should_stop:
             break
 
-    return ResearchResult(evidence=evidence, search_queries_run=queries_run)
+    return ResearchResult(evidence=evidence, search_queries_run=queries_run, used_cache=used_cache)
 
 
 def _normalize_for_match(text: str) -> str:
@@ -239,25 +242,36 @@ async def _handle_search(
     args: dict,
     queries_run: list[str],
     published_dates: dict[str, datetime | None],
-) -> str:
+    claim_type: ClaimType,
+) -> tuple[str, bool]:
     query = args.get("query", "").strip()
     if not query:
-        return "Error: query must not be empty."
+        return "Error: query must not be empty.", False
 
     queries_run.append(query)
-    results = await search_backend.search(query, max_results=SEARCH_RESULTS_PER_QUERY)
-    if not results:
-        return "No results found for this query."
+    response = await search_backend.search(
+        query, max_results=SEARCH_RESULTS_PER_QUERY, claim_type=claim_type
+    )
+    if not response.results:
+        return "No results found for this query.", response.from_cache
 
     lines = []
-    for result in results:
+    for result in response.results:
         published_dates[result.url] = result.published_at
         lines.append(
             f'- url={result.url} domain={result.domain} '
             f'published_at={result.published_at} title="{result.title}"\n'
             f"  snippet: {result.snippet}"
         )
-    return "\n".join(lines)
+    text = "\n".join(lines)
+    if response.from_cache:
+        text += (
+            f"\n\n(Note: these results were served from cache, originally "
+            f"retrieved at {response.cached_at.isoformat()} — they may not "
+            f"reflect the latest information, which matters most for "
+            f"TEMPORAL claims.)"
+        )
+    return text, response.from_cache
 
 
 async def _handle_fetch(args: dict, fetched_pages: dict[str, PageContent]) -> str:
