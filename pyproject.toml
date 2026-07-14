@@ -20,6 +20,7 @@ dependencies = [
 ]
 
 [project.scripts]
+fact-checker = "fact_checker.cli:main"
 fact-checker-mcp = "fact_checker.mcp_server:main"
 
 [project.optional-dependencies]
