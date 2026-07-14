@@ -80,9 +80,18 @@ _TOOLS = [
                         "type": "string",
                         "enum": ["PRIMARY", "SECONDARY", "TERTIARY"],
                         "description": (
-                            "PRIMARY: the original study, report, dataset, or official "
-                            "statement. SECONDARY: a news article reporting on it. "
-                            "TERTIARY: a blog or commentary discussing the article."
+                            "PRIMARY: the fact originates here — an official statement "
+                            "from the entity/organization the claim is about (e.g. a "
+                            "company's own leadership page naming its CEO), a raw "
+                            "dataset, an original study, a government record, or "
+                            "first-hand testimony. SECONDARY: an independent party "
+                            "reporting or compiling the fact without having created it "
+                            "— this includes news articles AND general reference/"
+                            "encyclopedia sites (e.g. Britannica, Wikipedia) — being "
+                            "authoritative does not make a source PRIMARY if it isn't "
+                            "the origin of the fact. TERTIARY: a blog, opinion piece, "
+                            "or commentary discussing or analyzing the topic, often "
+                            "itself citing secondary sources."
                         ),
                     },
                 },
