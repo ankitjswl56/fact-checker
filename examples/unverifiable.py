@@ -26,15 +26,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 
 
-# Real captured output, live on 2026-07-14 (gemini-3.1-flash-lite + Tavily) —
-# from a *different* claim ("Tim Cook is the CEO of Apple") than the one
-# above. That run is kept here deliberately: it's a genuine, unplanned
-# capture of the UNVERIFIABLE fail-safe firing on a claim that is normally
-# easy to verify, because that particular research attempt didn't land on a
-# citable source within its iteration budget. It's included as honest
-# evidence that the system reports UNVERIFIABLE rather than guessing when
-# research comes up empty — not as a demonstration of the claim above, which
-# has not yet been run live.
+# Example output, captured live on 2026-07-14 (gemini-3.1-flash-lite + Tavily),
+# for this exact claim:
 #
 # {
 #   "verdict": "UNVERIFIABLE",
@@ -46,7 +39,7 @@ if __name__ == "__main__":
 #   "warnings": ["No sources found"],
 #   "metadata": {
 #     "sources_evaluated": 0,
-#     "search_queries_run": ["who is the current CEO of Apple?"],
-#     "processing_time_ms": 9562
+#     "search_queries_run": ["\"neighbor's cat\" \"47 times\" \"last Tuesday\""],
+#     "processing_time_ms": 5273
 #   }
 # }

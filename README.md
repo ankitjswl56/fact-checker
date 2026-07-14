@@ -89,7 +89,9 @@ See [`examples/`](examples/) for five runnable scripts, one per verdict type, ea
 - [`false_claim.py`](examples/false_claim.py) — FALSE, debunked with primary astronaut testimony
 - [`opinion_claim.py`](examples/opinion_claim.py) — OPINION, short-circuits before any research runs
 - [`unverifiable.py`](examples/unverifiable.py) — UNVERIFIABLE, the no-guessing fail-safe
-- [`partially_true.py`](examples/partially_true.py) — PARTIALLY_TRUE, a compound claim (real output not yet captured, see Known Limitations)
+- [`partially_true.py`](examples/partially_true.py) — PARTIALLY_TRUE, a compound claim with one true and one false sub-claim
+
+A nice real-world validation caught during benchmarking: fact-checking "Tim Cook is the CEO of Apple" live turned up a real, dated announcement of Cook transitioning to executive chairman with John Ternus succeeding him — and the system correctly returned `PARTIALLY_TRUE` with a warning about the pending transition, rather than a stale flat `TRUE`. That's exactly the announced-but-not-yet-effective edge case the claim-type-aware recency decay and synthesizer prompt were designed to catch.
 
 ## Source Credibility Scoring
 
@@ -109,11 +111,12 @@ All four signals are returned individually in `credibility_breakdown` on every s
 ## Known Limitations
 
 - **Free-tier LLM quota is tight.** The default model is Gemini's free tier, and on this project's account `gemini-2.5-flash`/`gemini-3.5-flash` are capped at 20 requests/day, while `gemini-2.0-flash` isn't enabled on the free tier at all. Both `LLM_MODEL` and `LLM_MODEL_FAST` currently default to `gemini-3.1-flash-lite` as the only model with reliable headroom — weaker reasoning than the stronger Flash models, swappable via env var with no code changes once quota/budget allows.
-- **`PARTIALLY_TRUE` is implemented but not yet exercised in a live run** — the code path exists and is exercised by the synthesizer's own logic, but no live benchmark has produced it yet.
-- **Source-type labeling is occasionally too generous** — the research loop has been observed labeling secondary sources (e.g. an encyclopedia entry) as PRIMARY.
+- **A sub-claim's verdict can be reasoned from the model's background knowledge rather than a cited source.** The citation-verification guard only applies to evidence that *is* saved via `save_evidence` — it doesn't force every sub-claim in a compound claim to have a citation (observed on a `PARTIALLY_TRUE` benchmark: one sub-claim was correctly judged FALSE with no source ever fetched for it).
+- **Duplicate-domain evidence isn't down-weighted.** Two saved quotes from the same URL still count as two sources in the pool (observed on an IDENTITY benchmark) — credibility scoring doesn't currently check independence across sources.
 - **Only Tavily is implemented** as a search backend; Brave (the second backend in the original design) requires a paid API key and hasn't been built.
 - **MCP server is schema-verified but not yet tested against a live MCP client** end-to-end.
 - **The search cache can serve results up to its TTL old** even while fully online — TTL is claim-type-aware (5 minutes for `TEMPORAL`, up to a day for stable `FACTUAL` claims) specifically to bound this, and a cache hit surfaces a warning in the result, but it's not eliminated.
+- **`litellm`'s tool-calling path requires the `[proxy]` extra** even though this project never runs litellm's proxy server — it unconditionally imports proxy-server code once the `mcp` package is importable (which `fastmcp` requires), pulling in `fastapi`/`orjson`/etc. as a side effect. Already handled in `pyproject.toml`; noted here in case it resurfaces with a litellm upgrade.
 - Per the design's existing safeguards: no Wikipedia (user-editable, not a primary source), no verdict without a verbatim quote, `UNVERIFIABLE` rather than a guess when evidence is thin.
 
 ## Development

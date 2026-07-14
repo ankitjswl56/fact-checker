@@ -29,12 +29,53 @@ if __name__ == "__main__":
     asyncio.run(main())
 
 
-# This claim is deliberately compound: the classifier should decompose it
-# into two sub-claims — "Napoleon was unusually short" (a persistent myth;
-# he was roughly average height for his era) and "defeated at Waterloo"
-# (true) — which should combine into a PARTIALLY_TRUE overall verdict.
+# Example output, captured live on 2026-07-14 (gemini-3.1-flash-lite + Tavily):
 #
-# No real output has been captured for this one yet — PARTIALLY_TRUE hasn't
-# been exercised in a live run, deferred to the next session with fresh
-# Gemini quota (see project memory). Run this script yourself to fill in
-# this comment with real output once quota allows.
+# {
+#   "verdict": "PARTIALLY_TRUE",
+#   "confidence": 0.85,
+#   "summary": "The claim correctly identifies Napoleon's defeat at the
+#                Battle of Waterloo, but the assertion that he was
+#                'unusually short' is a historical misconception.",
+#   "sub_claims": [
+#     {
+#       "claim": "Napoleon Bonaparte was defeated at the Battle of Waterloo.",
+#       "verdict": "TRUE",
+#       "confidence": 1.0,
+#       "supporting_evidence": ["src_1"]
+#     },
+#     {
+#       "claim": "Napoleon Bonaparte was unusually short for his time.",
+#       "verdict": "FALSE",
+#       "confidence": 0.7
+#     }
+#   ],
+#   "sources": [
+#     {
+#       "id": "src_1",
+#       "url": "https://www.history.com/this-day-in-history/june-18/napoleon-defeated-at-waterloo",
+#       "domain": "www.history.com",
+#       "credibility_score": 0.505,
+#       "stance": "NEUTRAL",
+#       "quote": "At Waterloo in Belgium on June 18, 1815, Napoleon Bonaparte
+#                 suffers defeat at the hands of the Duke of Wellington,
+#                 bringing an end to the Napoleonic era of European history."
+#     }
+#   ],
+#   "reasoning_trace": "The evidence (src_1) confirms Napoleon's defeat at
+#     the Battle of Waterloo. However, the provided evidence does not
+#     address his height. Historical consensus establishes that Napoleon
+#     was approximately 5 feet 7 inches, which was average for a
+#     Frenchman of his time, making the claim regarding his height
+#     factually incorrect despite the accuracy of the Waterloo claim.",
+#   "warnings": [
+#     "The evidence pool lacks documentation concerning the sub-claim about
+#      Napoleon's height, which is a widely documented historical myth."
+#   ]
+# }
+#
+# Known gap worth noting honestly: the "height" sub-claim's FALSE verdict
+# was reasoned from the model's own background knowledge, not a cited
+# source — no evidence was fetched/saved for that half of the claim. The
+# citation-verification guard only applies to evidence that *was* saved;
+# it doesn't force every sub-claim to have one.
